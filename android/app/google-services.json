@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "525811014450",
+    "project_id": "sukhaphapthai-abc1b",
+    "storage_bucket": "sukhaphapthai-abc1b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525811014450:android:20aa72019b8081749f952b",
+        "android_client_info": {
+          "package_name": "com.example.capstone_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB71oGVqpgxfqqaStlNdph0jh-zR3jWrWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
