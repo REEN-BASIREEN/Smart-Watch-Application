@@ -63,13 +63,22 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: Text('Signup', style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Color.fromRGBO(162, 128, 93, 1.0),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text('Signup',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Color(0xFF008080))),
+        iconTheme: IconThemeData(color: Color(0xFF13cfc7)),
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Color.fromRGBO(218, 198, 163, 1.0),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFFe0c3fc), Color(0xFF8ec5fc)],
+          ),
         ),
         child: Center(
           child: SingleChildScrollView(
@@ -86,11 +95,6 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Image.network(
-                          'https://upload.wikimedia.org/wikipedia/commons/6/6d/Todoist_logo.png',
-                          height: 80,
-                          fit: BoxFit.contain,
-                        ),
                         SizedBox(height: 20),
                         TextFormField(
                           controller: _emailController,
@@ -132,13 +136,14 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         SizedBox(height: 30),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF1ec96b),
+                            shape: StadiumBorder(),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 32, vertical: 12),
+                          ),
                           onPressed: _signup,
                           child: Text('Signup'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromRGBO(162, 128, 93, 1.0),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 15),
-                          ),
                         ),
                       ],
                     ),

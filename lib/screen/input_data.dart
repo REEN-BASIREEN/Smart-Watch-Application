@@ -61,45 +61,64 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: Text("Add New Data"),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text("Add New Data",
+            style: TextStyle(
+                color: Color(0xFF008080), fontWeight: FontWeight.bold)),
+        iconTheme: IconThemeData(color: Color(0xFF13cfc7)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _heartRateController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: "Heart Rate (bpm)",
-                border: OutlineInputBorder(),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFFe0c3fc), Color(0xFF8ec5fc)],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _heartRateController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: "Heart Rate (bpm)",
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            TextField(
-              controller: _oxygenController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: "Oxygen Saturation (%)",
-                border: OutlineInputBorder(),
+              SizedBox(height: 16),
+              TextField(
+                controller: _oxygenController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: "Oxygen Saturation (%)",
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            TextField(
-              controller: _temperatureController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: "Body Temperature (°C)",
-                border: OutlineInputBorder(),
+              SizedBox(height: 16),
+              TextField(
+                controller: _temperatureController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: "Body Temperature (°C)",
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: _saveDataToFirestore,
-              child: Text("Save"),
-            ),
-          ],
+              SizedBox(height: 24),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF1ec96b),
+                  shape: StadiumBorder(),
+                ),
+                onPressed: _saveDataToFirestore,
+                child: Text("Save"),
+              ),
+            ],
+          ),
         ),
       ),
     );
