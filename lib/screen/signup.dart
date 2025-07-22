@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:capstone_project/screen/login.dart';
+import 'package:capstone_project/theme.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -63,22 +64,12 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text('Signup',
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFF008080))),
-        iconTheme: IconThemeData(color: Color(0xFF13cfc7)),
+        title: Text('Signup'),
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFFe0c3fc), Color(0xFF8ec5fc)],
-          ),
+          color: AppColors.background,
         ),
         child: Center(
           child: SingleChildScrollView(
@@ -86,6 +77,7 @@ class _SignupScreenState extends State<SignupScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Card(
                 elevation: 8,
+                color: AppColors.cardBg,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),
                 child: Padding(
@@ -98,10 +90,23 @@ class _SignupScreenState extends State<SignupScreen> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: _emailController,
+                          style: TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Email',
-                            prefixIcon: Icon(Icons.email),
-                            border: OutlineInputBorder(),
+                            labelStyle:
+                                TextStyle(color: AppColors.textSecondary),
+                            prefixIcon:
+                                Icon(Icons.email, color: AppColors.secondary),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: AppColors.cardBg),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: AppColors.cardBg),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColors.secondary),
+                            ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -118,10 +123,23 @@ class _SignupScreenState extends State<SignupScreen> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: _passwordController,
+                          style: TextStyle(color: AppColors.textPrimary),
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            prefixIcon: Icon(Icons.lock),
-                            border: OutlineInputBorder(),
+                            labelStyle:
+                                TextStyle(color: AppColors.textSecondary),
+                            prefixIcon:
+                                Icon(Icons.lock, color: AppColors.secondary),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: AppColors.cardBg),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: AppColors.cardBg),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColors.secondary),
+                            ),
                           ),
                           obscureText: true,
                           validator: (value) {
@@ -136,14 +154,12 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         SizedBox(height: 30),
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF1ec96b),
-                            shape: StadiumBorder(),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 32, vertical: 12),
-                          ),
+                          style: Theme.of(context).elevatedButtonTheme.style,
                           onPressed: _signup,
-                          child: Text('Signup'),
+                          child: Text(
+                            'Signup',
+                            style: TextStyle(color: AppColors.textPrimary),
+                          ),
                         ),
                       ],
                     ),

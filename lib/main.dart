@@ -3,6 +3,7 @@ import 'package:capstone_project/db_helper/firebase_options.dart';
 import 'package:capstone_project/screen/login.dart';
 import 'package:capstone_project/screen/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:capstone_project/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Omnitrix',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      title: 'Biosentinel',
+      theme: darkTheme(),
       initialRoute: '/login', // หน้าเริ่มต้น
       routes: {
         '/login': (context) => LoginPage(),

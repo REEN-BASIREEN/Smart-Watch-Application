@@ -200,8 +200,8 @@ class _DetailedGraphsPageState extends State<DetailedGraphsPage>
         elevation: 0,
         title: Text('Detailed Graphs',
             style: TextStyle(
-                color: Color(0xFF008080), fontWeight: FontWeight.bold)),
-        iconTheme: IconThemeData(color: Color(0xFF13cfc7)),
+                color: Color(0xFF1D9BF0), fontWeight: FontWeight.bold)),
+        iconTheme: IconThemeData(color: Color(0xFF1D9BF0)),
         bottom: TabBar(
           controller: _tabController,
           tabs: [
@@ -216,7 +216,7 @@ class _DetailedGraphsPageState extends State<DetailedGraphsPage>
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFFe0c3fc), Color(0xFF8ec5fc)],
+            colors: [Color(0xFF192734), Color(0xFF192734)],
           ),
         ),
         child: TabBarView(

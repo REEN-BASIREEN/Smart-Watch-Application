@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:capstone_project/screen/edit_profile.dart';
+import 'package:capstone_project/theme.dart';
 
 class PersonalPage extends StatefulWidget {
   @override
@@ -95,17 +96,20 @@ class _PersonalPageState extends State<PersonalPage> {
       margin: EdgeInsets.only(bottom: 12),
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardBg,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
+        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4)],
       ),
       child: Row(
         children: [
-          Icon(icon, color: Colors.teal),
+          Icon(icon, color: AppColors.secondary),
           SizedBox(width: 16),
           Expanded(
             child: Text('$label: $value',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.textPrimary)),
           ),
         ],
       ),
@@ -115,17 +119,11 @@ class _PersonalPageState extends State<PersonalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFF13cfc7)),
-        title: Text('ข้อมูลส่วนตัว',
-            style: TextStyle(
-                color: Color(0xFF008080), fontWeight: FontWeight.bold)),
+        title: Text('ข้อมูลส่วนตัว'),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit, color: Color(0xFF13cfc7)),
+            icon: Icon(Icons.edit),
             onPressed: userData == null
                 ? null
                 : () {
@@ -148,16 +146,17 @@ class _PersonalPageState extends State<PersonalPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFFe0c3fc), Color(0xFF8ec5fc)],
-          ),
+          color: AppColors.background,
         ),
         child: _loading
-            ? Center(child: CircularProgressIndicator())
+            ? Center(
+                child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.secondary),
+              ))
             : userData == null || userData!.isEmpty
-                ? Center(child: Text('ยังไม่มีข้อมูลผู้ใช้'))
+                ? Center(
+                    child: Text('ยังไม่มีข้อมูลผู้ใช้',
+                        style: TextStyle(color: AppColors.textPrimary)))
                 : ListView(
                     padding: EdgeInsets.all(20),
                     children: [

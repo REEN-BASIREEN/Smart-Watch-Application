@@ -29,11 +29,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _firestore = FirebaseFirestore.instance;
 
   // Theme colors
-  final Color backgroundColor = Color(0xFF15202B); // สีพื้นหลัก
-  final Color cardBackground = Colors.white; // สีพื้นหลังฟิลด์
-  final Color textColor = Color(0xFF192734); // สีตัวอักษรหลัก (เข้มขึ้น)
-  final Color secondaryText = Color(0xFF536471); // สีตัวอักษรรอง
-  final Color accentColor = Color(0xFF192734); // สีปุ่มและไอคอน
+  final Color backgroundColor = Color(0xFF15202B);
+  final Color cardBackground = Color(0xFF192734);
+  final Color textColor = Color(0xFFE1E8ED);
+  final Color secondaryText = Color(0xFF8899A6);
+  final Color accentColor = Color(0xFF1D9BF0);
 
   late TextEditingController _nameController;
   late TextEditingController _emailController;
@@ -60,19 +60,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
       await _firestore.collection('users').doc(userId).update({
         'name': _nameController.text,
         'email': _emailController.text,
-        'dob': Timestamp.fromDate(_selectedDate!), // save as Timestamp
+        'dob': Timestamp.fromDate(_selectedDate!),
         'gender': _selectedGender ?? '',
-        'weight': num.tryParse(_weightController.text) ?? 0, // save as number
-        'height': num.tryParse(_heightController.text) ?? 0, // save as number
+        'weight': num.tryParse(_weightController.text) ?? 0,
+        'height': num.tryParse(_heightController.text) ?? 0,
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Profile updated successfully')),
+        SnackBar(
+          content: Text('Profile updated successfully', 
+            style: TextStyle(color: textColor)
+          ),
+          backgroundColor: cardBackground,
+        ),
       );
       Navigator.pop(context);
     } catch (e) {
       print('Error updating user data: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to update profile')),
+        SnackBar(
+          content: Text('Failed to update profile',
+            style: TextStyle(color: textColor)
+          ),
+          backgroundColor: cardBackground,
+        ),
       );
     }
   }
@@ -83,6 +93,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
       initialDate: _selectedDate ?? DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.dark(
+              primary: accentColor,
+              onPrimary: textColor,
+              surface: cardBackground,
+              onSurface: textColor,
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (pickedDate != null) {
@@ -98,11 +121,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label,
-              style: TextStyle(
-                  color: Color(0xFF1D9BF0),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16)),
+          Text(
+            label,
+            style: TextStyle(
+              color: textColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+          ),
           SizedBox(height: 6),
           field,
         ],
@@ -110,27 +136,40 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
+  InputDecoration _getInputDecoration() {
+    return InputDecoration(
+      filled: true,
+      fillColor: cardBackground,
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: accentColor),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: secondaryText),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: accentColor),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: cardBackground,
         elevation: 0,
-        title: Text('Edit Profile',
-            style: TextStyle(
-                color: Color.fromARGB(222, 50, 158, 236),
-                fontWeight: FontWeight.bold)),
-        iconTheme: IconThemeData(color: Color(0xFF13cfc7)),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF0F1419), Color(0xFF0F1419)],
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(
+            color: textColor,
+            fontWeight: FontWeight.bold,
           ),
         ),
+        iconTheme: IconThemeData(color: accentColor),
+      ),
+      body: Container(
+        color: backgroundColor,
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
@@ -141,12 +180,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   field: TextField(
                     controller: _nameController,
                     style: TextStyle(color: textColor),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      hintStyle: TextStyle(color: secondaryText),
-                    ),
+                    decoration: _getInputDecoration(),
                   ),
                 ),
                 _buildInputField(
@@ -155,12 +189,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     controller: _emailController,
                     enabled: false,
                     style: TextStyle(color: secondaryText),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      hintStyle: TextStyle(color: secondaryText),
-                    ),
+                    decoration: _getInputDecoration(),
                   ),
                 ),
                 _buildInputField(
@@ -168,24 +197,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   field: GestureDetector(
                     onTap: _pickDate,
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(6),
-                        color: Colors.white,
+                        border: Border.all(color: secondaryText),
+                        borderRadius: BorderRadius.circular(4),
+                        color: cardBackground,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             _selectedDate != null
-                                ? DateFormat('yyyy-MM-dd')
-                                    .format(_selectedDate!)
+                                ? DateFormat('yyyy-MM-dd').format(_selectedDate!)
                                 : 'Select Date',
-                            style: TextStyle(fontSize: 16, color: textColor),
+                            style: TextStyle(
+                              color: textColor,
+                              fontSize: 16,
+                            ),
                           ),
-                          Icon(Icons.calendar_today, size: 18),
+                          Icon(Icons.calendar_today,
+                              size: 18, color: accentColor),
                         ],
                       ),
                     ),
@@ -195,12 +226,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   label: 'Gender',
                   field: DropdownButtonFormField<String>(
                     value: _selectedGender,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                    ),
-                    items: ['Male', 'Female']
+                    dropdownColor: cardBackground,
+                    style: TextStyle(color: textColor),
+                    decoration: _getInputDecoration(),
+                    items: ['Male', 'Female', 'Other']
                         .map((gender) => DropdownMenuItem(
                               value: gender,
                               child: Text(gender),
@@ -217,41 +246,36 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   label: 'Weight (kg)',
                   field: TextField(
                     controller: _weightController,
-                    keyboardType: TextInputType.number,
                     style: TextStyle(color: textColor),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      hintStyle: TextStyle(color: secondaryText),
-                    ),
+                    keyboardType: TextInputType.number,
+                    decoration: _getInputDecoration(),
                   ),
                 ),
                 _buildInputField(
                   label: 'Height (cm)',
                   field: TextField(
                     controller: _heightController,
-                    keyboardType: TextInputType.number,
                     style: TextStyle(color: textColor),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      hintStyle: TextStyle(color: secondaryText),
-                    ),
+                    keyboardType: TextInputType.number,
+                    decoration: _getInputDecoration(),
                   ),
                 ),
                 SizedBox(height: 24),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF1D9BF0),
+                    backgroundColor: accentColor,
                     shape: StadiumBorder(),
                   ),
                   onPressed: _saveUserData,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 14),
-                    child: Text('Save',
-                        style: TextStyle(fontSize: 16, color: Colors.white)),
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: textColor,
+                      ),
+                    ),
                   ),
                 ),
               ],

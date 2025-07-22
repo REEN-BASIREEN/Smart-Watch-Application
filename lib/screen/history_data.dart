@@ -47,15 +47,15 @@ class _HistoryDataPageState extends State<HistoryDataPage> {
         elevation: 0,
         title: const Text('Health History',
             style: TextStyle(
-                color: Color(0xFF008080), fontWeight: FontWeight.bold)),
-        iconTheme: const IconThemeData(color: Color(0xFF13cfc7)),
+                color: Color(0xFF1D9BF0), fontWeight: FontWeight.bold)),
+        iconTheme: const IconThemeData(color: Color(0xFF1D9BF0)),
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFFe0c3fc), Color(0xFF8ec5fc)],
+            colors: [Color(0xFF192734), Color(0xFF192734)],
           ),
         ),
         child: Column(
@@ -70,12 +70,12 @@ class _HistoryDataPageState extends State<HistoryDataPage> {
                     style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF008080)),
+                        color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   ElevatedButton(
                     onPressed: _pickDate,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF13cfc7),
+                      backgroundColor: Color(0xFF1D9BF0),
                       shape: const StadiumBorder(),
                     ),
                     child: const Text('Select Date',

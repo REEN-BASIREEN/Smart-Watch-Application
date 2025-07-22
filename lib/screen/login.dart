@@ -57,59 +57,72 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text('Login',
-            style: TextStyle(
-                color: Color(0xFF008080), fontWeight: FontWeight.bold)),
-        iconTheme: IconThemeData(color: Color(0xFF13cfc7)),
+        title: Text('Login'),
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFFe0c3fc), Color(0xFF8ec5fc)],
-          ),
+          color: Color(0xFF0F1419),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                'lib/img/rmbio.png', // โลโก้หัวใจหรือสัญญาณชีพ
+                height: 220,
+                width: 300,
+                // color: Color(0xFF008080),
+              ),
+              SizedBox(height: 16),
               Text(
-                'Welcome to Omnitrix',
+                'Welcome to BIOSENTINEL',
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF008080)),
+                    color: Color(0xFFE1E8ED)),
               ),
               SizedBox(height: 24),
               TextField(
                 controller: _emailController,
+                style: TextStyle(color: Color(0xFFE1E8ED)),
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(color: Color(0xFF8899A6)),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF192734)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF192734)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF1D9BF0)),
+                  ),
                 ),
               ),
               SizedBox(height: 16),
               TextField(
                 controller: _passwordController,
+                style: TextStyle(color: Color(0xFFE1E8ED)),
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(color: Color(0xFF8899A6)),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF192734)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF192734)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF1D9BF0)),
+                  ),
                 ),
                 obscureText: true,
               ),
               SizedBox(height: 24),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF13cfc7),
-                  shape: StadiumBorder(),
-                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                ),
+                style: Theme.of(context).elevatedButtonTheme.style,
                 onPressed: _login,
                 child: Text('Login'),
               ),
@@ -127,14 +140,14 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       "Don't have an account? ",
                       style: TextStyle(
-                        color: Colors.black87,
+                        color: Color(0xFF8899A6),
                         fontSize: 16,
                       ),
                     ),
                     Text(
                       "Signup here",
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Color(0xFF1D9BF0),
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         decoration: TextDecoration.underline,
