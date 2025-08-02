@@ -47,8 +47,8 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDFOFyWi0dnz5CJXoDjoXD7VgJ-9m0hxY0',
-    appId: '1:525811014450:web:8982a28c1471fdb29f952b',
+    apiKey: '******************',
+    appId: '******************',
     messagingSenderId: '525811014450',
     projectId: 'sukhaphapthai-abc1b',
     authDomain: 'sukhaphapthai-abc1b.firebaseapp.com',
@@ -57,16 +57,16 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB71oGVqpgxfqqaStlNdph0jh-zR3jWrWw',
-    appId: '1:525811014450:android:20aa72019b8081749f952b',
+    apiKey: '******************',
+    appId: '******************',
     messagingSenderId: '525811014450',
     projectId: 'sukhaphapthai-abc1b',
     storageBucket: 'sukhaphapthai-abc1b.firebasestorage.app',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDFOFyWi0dnz5CJXoDjoXD7VgJ-9m0hxY0',
-    appId: '1:525811014450:web:17e23dc1ef1035009f952b',
+    apiKey: '*******************',
+    appId: '******************',
     messagingSenderId: '525811014450',
     projectId: 'sukhaphapthai-abc1b',
     authDomain: 'sukhaphapthai-abc1b.firebaseapp.com',
